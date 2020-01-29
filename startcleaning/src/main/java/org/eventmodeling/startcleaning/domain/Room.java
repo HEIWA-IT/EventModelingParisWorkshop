@@ -1,4 +1,4 @@
-package toto;
+package org.eventmodeling.startcleaning.domain;
 
 import java.util.Objects;
 
