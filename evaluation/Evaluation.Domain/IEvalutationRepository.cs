@@ -1,9 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Evaluation.Domain
 {
 	public interface IEvalutationRepository
 	{
-		Task Save(IEvent @event);
-	}
+		Task Save(ReviewPublished @event);
+
+        IEnumerable<ReviewPublished> GetEvents();
+    }
 }
