@@ -1,5 +1,5 @@
 package toto;
 
-public interface CommandHandler {
-    void handle(StartRoomCleaning startRoomCleaning);
+public interface CommandHandler<T extends Command> {
+    void handle(T command);
 }

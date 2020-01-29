@@ -13,7 +13,7 @@ public class StartCleaningHandlerTest {
     private EventStore eventStore = new InMemoryEventStore();
 
     @Test
-    public void name() {
+    public void should_generate_room_cleaning_started_event() {
         CommandHandler commandHandler = new StartCleaningHandler(eventStore);
 
         commandHandler.handle(new StartRoomCleaning(301));
@@ -31,7 +31,7 @@ public class StartCleaningHandlerTest {
     interface Event {
     }
 
-    private static class StartCleaningHandler implements CommandHandler {
+    private static class StartCleaningHandler implements CommandHandler<StartRoomCleaning> {
         private final EventStore eventStore;
 
         public StartCleaningHandler(EventStore eventStore) {
