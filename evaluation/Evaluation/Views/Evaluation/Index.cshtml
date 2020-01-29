@@ -1,8 +1,69 @@
-﻿@{
+﻿@model Evaluation.Features.Evaluation.Evaluate
+
+@{
     ViewData["Title"] = "Evaluation";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<form asp-action="Publish">
+    <div class="row">
+        <div class="col">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="GuestId" class="control-label"></label>
+                <input asp-for="GuestId" class="form-control" />
+                <span asp-validation-for="GuestId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoomNumber" class="control-label"></label>
+                <input asp-for="RoomNumber" class="form-control" />
+                <span asp-validation-for="RoomNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="From" class="control-label"></label>
+                <input asp-for="From" class="form-control" />
+                <span asp-validation-for="From" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="To" class="control-label"></label>
+                <input asp-for="To" class="form-control" />
+                <span asp-validation-for="To" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col">
+
+            @{
+                var items = new List<SelectListItem>
+                        {
+                    new SelectListItem("1", "1"),
+                    new SelectListItem("2", "2"),
+                    new SelectListItem("3", "3"),
+                    new SelectListItem("4", "4"),
+                    new SelectListItem("5", "5"),
+                };
+            }
+            @for (int i = 0; i < Model.Ratings.Length; i++)
+            {
+                <div class="form-group row">
+                    <input asp-for="Ratings[i].RateType" class="form-control" readonly value="@Model.Ratings[i].RateType" />
+                    <select asp-for="Ratings[i].Rate" asp-items="items" class="form-control"></select>
+                    <span asp-validation-for="Ratings[i].RateType" class="text-danger"></span>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Comment" class="control-label"></label>
+        <textarea asp-for="Comment" class="form-control"></textarea>
+        <span asp-validation-for="Comment" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+</form>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,3 +1,5 @@
+using Evaluation.Common;
+using Evaluation.Features.Evaluation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -19,6 +21,8 @@ namespace Evaluation
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddScoped<IEvaluationRepository, InMemoryEvaluationRepository>();
+            services.AddScoped<IHandle<Evaluate>, EvaluateHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
