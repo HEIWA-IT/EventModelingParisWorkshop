@@ -79,3 +79,5 @@ nb-configuration.xml
 evaluation/.vs
 evaluation/Evaluation.Domain/obj
 /evaluation/Evaluation.UI.Web/obj
+/evaluation/Evaluation.Domain.Tests/obj
+/.vs
