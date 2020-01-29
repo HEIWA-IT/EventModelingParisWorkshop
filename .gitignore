@@ -76,3 +76,5 @@ nb-configuration.xml
 ## OS X
 ##############################
 .DS_Store
+evaluation/.vs
+evaluation/Evaluation.Domain/obj
