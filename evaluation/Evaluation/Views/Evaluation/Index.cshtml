@@ -30,24 +30,13 @@
             </div>
         </div>
         <div class="col">
-
-            @{
-                var items = new List<SelectListItem>
-                        {
-                    new SelectListItem("1", "1"),
-                    new SelectListItem("2", "2"),
-                    new SelectListItem("3", "3"),
-                    new SelectListItem("4", "4"),
-                    new SelectListItem("5", "5"),
-                };
-            }
             @for (int i = 0; i < Model.Ratings.Length; i++)
             {
-                <div class="form-group row">
-                    <input asp-for="Ratings[i].RateType" class="form-control" readonly value="@Model.Ratings[i].RateType" />
-                    <select asp-for="Ratings[i].Rate" asp-items="items" class="form-control"></select>
-                    <span asp-validation-for="Ratings[i].RateType" class="text-danger"></span>
-                </div>
+            <div class="form-group row">
+                <input asp-for="Ratings[i].RateType" class="form-control" readonly value="@Model.Ratings[i].RateType" />
+                <input asp-for="Ratings[i].Rate" class="kv-ltr-theme-svg-star rating-loading form-control" dir="ltr" data-min="0" data-max="5" data-step="1" data-size="md"></input>
+                <span asp-validation-for="Ratings[i].RateType" class="text-danger"></span>
+            </div>
             }
         </div>
     </div>
@@ -63,7 +52,15 @@
     </div>
 </form>
 
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $(document).ready(function () {
+            $('.kv-ltr-theme-svg-star').rating({
+                hoverOnClear: false,
+                theme: 'krajee-svg'
+            });
+        });
+    </script>
 }
