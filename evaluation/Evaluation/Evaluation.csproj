@@ -12,6 +12,10 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <DockerfileRunArguments>--volume c:\events\evaluation:/home/events/evaluation</DockerfileRunArguments>
+  </PropertyGroup>
+
 
 
 </Project>
