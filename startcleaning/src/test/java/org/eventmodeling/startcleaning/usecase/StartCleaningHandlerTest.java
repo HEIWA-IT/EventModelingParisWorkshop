@@ -15,7 +15,8 @@ public class StartCleaningHandlerTest {
     public void should_generate_room_cleaning_started_event() {
         CommandHandler commandHandler = new StartCleaningHandler(eventStore);
 
-        commandHandler.handle(new StartRoomCleaning(301));
+        StartRoomCleaning command = new StartRoomCleaning(301);
+        commandHandler.handle(command);
 
         RoomCleaningStarted roomCleaningStarted = new RoomCleaningStarted(new Room(301));
         Assertions.assertThat(eventStore.all()).containsOnly(roomCleaningStarted);
