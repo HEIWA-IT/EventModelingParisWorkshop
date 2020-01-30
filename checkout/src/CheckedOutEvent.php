@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App;
 
-final class CheckedOutEvent implements Event
+final class CheckedOutEvent extends Event
 {
     public int $roomNumber;
     public \DateTimeImmutable $checkOutDate;

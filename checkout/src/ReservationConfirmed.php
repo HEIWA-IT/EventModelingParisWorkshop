@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App;
 
-final class ReservationConfirmed implements Event
+final class ReservationConfirmed extends Event
 {
     public int $roomNumber;
     public \DateTimeImmutable $startDate;

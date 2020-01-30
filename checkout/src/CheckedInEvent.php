@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App;
 
-final class CheckedInEvent implements Event
+final class CheckedInEvent extends Event
 {
     public int $roomNumber;
 

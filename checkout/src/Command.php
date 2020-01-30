@@ -7,6 +7,7 @@ abstract class Command
 {
     public function __toString(): string
     {
-        return __CLASS__;
+        $explode = \explode('\\', \get_class($this));
+        return \end($explode);
     }
 }

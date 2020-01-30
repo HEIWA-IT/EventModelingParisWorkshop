@@ -10,7 +10,7 @@ use App\Command;
 use App\CommandHandler;
 use App\Events;
 
-class CheckOutTest extends Specification
+class CheckOutCommandHandlerTest extends Specification
 {
     function Given(): Events
     {

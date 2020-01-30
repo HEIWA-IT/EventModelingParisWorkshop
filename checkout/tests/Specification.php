@@ -34,14 +34,19 @@ abstract class Specification extends TestCase
 
     public function PrintDocumentation(Specification $specification)
     {
-        echo "Given: ";
+        echo "Given: " . \PHP_EOL;
         foreach ($specification->Given() as $event) {
-            echo $event . \PHP_EOL;
+            echo "\t" . $event . \PHP_EOL;
         }
-        echo "When: " . $specification->When();
-        echo "Expect: ";
+        echo "When: " . $specification->When() . \PHP_EOL;
+        echo "Expect: " . \PHP_EOL;
         foreach ($this->produced as $producedEvent) {
-            echo $producedEvent . \PHP_EOL;
+            echo "\t" . $producedEvent . \PHP_EOL;
         }
+    }
+
+    public function tearDown(): void
+    {
+        $this->PrintDocumentation($this);
     }
 }
