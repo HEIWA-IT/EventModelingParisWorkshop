@@ -1,7 +1,7 @@
 ﻿using System;
 using Evaluation.Common;
 
-namespace Evaluation.Features.Evaluation
+namespace Evaluation.Features.RoomAvailability
 {
 	public class RoomCheckedOut : IEvent
 	{
