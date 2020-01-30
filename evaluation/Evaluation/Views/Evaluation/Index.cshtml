@@ -34,7 +34,7 @@
             {
             <div class="form-group row">
                 <input asp-for="Ratings[i].RateType" class="form-control" readonly value="@Model.Ratings[i].RateType" />
-                <input asp-for="Ratings[i].Rate" class="kv-ltr-theme-svg-star rating-loading form-control" dir="ltr" data-min="0" data-max="5" data-step="1" data-size="md"></input>
+                <input asp-for="Ratings[i].Rate" class="kv-ltr-theme-svg-star rating-loading form-control" data-show-clear="false" data-show-caption="false" dir="ltr" data-min="0" data-max="5" data-step="1" data-size="sm" />
                 <span asp-validation-for="Ratings[i].RateType" class="text-danger"></span>
             </div>
             }
