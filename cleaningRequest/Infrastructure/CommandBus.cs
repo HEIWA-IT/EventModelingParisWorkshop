@@ -26,15 +26,15 @@ namespace Infrastructure
     {
         readonly Dictionary<Type, List<CommandSubscription>> _subscribersByCommandType = new Dictionary<Type, List<CommandSubscription>>();
 
-        public void Handle(ICommand evt)
+        public void Handle(ICommand command)
         {
-            var commandType = evt.GetType();
+            var commandType = command.GetType();
 
             if (_subscribersByCommandType.TryGetValue(commandType, out var handlers))
             {
                 foreach (var commandSubscription in handlers)
                 {
-                    commandSubscription.Handle(evt);
+                    commandSubscription.Handle(command);
                 }
             }
         }
@@ -47,7 +47,7 @@ namespace Infrastructure
                 handlers = new List<CommandSubscription>();
                 _subscribersByCommandType[commandType] = handlers;
             }
-            handlers.Add(new CommandSubscription { Subscriber = handler, Handle = evt => handler.Handle((T)evt) });
+            handlers.Add(new CommandSubscription { Subscriber = handler, Handle = command => handler.Handle((T)command) });
         }
 
         public void Unsubscribe<T>(ICommandHandler<T> handler) where T : ICommand

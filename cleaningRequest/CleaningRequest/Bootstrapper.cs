@@ -9,7 +9,7 @@ namespace CleaningRequest
         public static void Start(IServiceCollection services)
         {
             var eventBus  = new EventBus();
-            var requestCleaningHandler = new RequestCleaningHandler(eventBus);
+            var requestCleaningHandler = Decorate(new RequestCleaningHandler(eventBus));
             var eventBusCleaningRequestedBridge = new EventBusCleaningRequestedBridge(Settings.ConfirmUrl);
             var commandBus = new CommandBus();
 
@@ -18,6 +18,13 @@ namespace CleaningRequest
 
             services.AddSingleton<ICommandBus>(commandBus);
             services.AddSingleton<IEventBus>(eventBus);
+        }
+
+        private static ICommandHandler<T> Decorate<T>(ICommandHandler<T> commandHandler) where T : ICommand
+        {
+            return new CommandHandlerLogger<T>(
+                new CommandHandlerErrorManagement<T>(
+                    commandHandler));
         }
     }
 }
