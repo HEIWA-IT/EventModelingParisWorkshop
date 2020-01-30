@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleaningRequestConfirmed", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{A09235D0-6773-42AF-8D77-6C056E7F6BAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleaningRequest.Tests", "CleaningRequest.Tests\CleaningRequest.Tests.csproj", "{F792F89F-ACAC-452D-B10E-C6F019A3F7F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleaningRequest.Tests", "CleaningRequest.Tests\CleaningRequest.Tests.csproj", "{F792F89F-ACAC-452D-B10E-C6F019A3F7F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rooms", "Rooms\Rooms.csproj", "{FCECB1C3-CF3C-4BEC-B5C9-971102CF93B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{F792F89F-ACAC-452D-B10E-C6F019A3F7F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F792F89F-ACAC-452D-B10E-C6F019A3F7F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F792F89F-ACAC-452D-B10E-C6F019A3F7F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCECB1C3-CF3C-4BEC-B5C9-971102CF93B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCECB1C3-CF3C-4BEC-B5C9-971102CF93B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCECB1C3-CF3C-4BEC-B5C9-971102CF93B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCECB1C3-CF3C-4BEC-B5C9-971102CF93B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
