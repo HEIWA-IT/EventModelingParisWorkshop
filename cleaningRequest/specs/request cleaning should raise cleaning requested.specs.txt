@@ -1,0 +1,14 @@
+request cleaning should raise cleaning requested
+
+Given
+	nothing special
+When
+	request cleaning
+		cleaning id : 7c0534ed-ec70-40b7-acb2-52568eea6a9d
+		room number : 12
+		schedule : 01/01/2020 00:00:00
+Then
+	cleaning requested
+		cleaning id : 7c0534ed-ec70-40b7-acb2-52568eea6a9d
+		room number : 12
+		schedule : 01/01/2020 00:00:00
