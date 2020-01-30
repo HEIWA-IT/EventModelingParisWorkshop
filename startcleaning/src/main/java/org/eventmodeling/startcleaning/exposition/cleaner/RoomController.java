@@ -15,7 +15,7 @@ public class RoomController {
     private final StartCleaningHandler startCleaningHandler;
 
     public RoomController() {
-        this.startCleaningHandler = new StartCleaningHandler(new InMemoryEventStore(), new CleaningPlanning());
+        this.startCleaningHandler = new StartCleaningHandler(new InMemoryEventStore());
     }
 
     @PostMapping("/xtra-cleaning/room/{roomId}/start")

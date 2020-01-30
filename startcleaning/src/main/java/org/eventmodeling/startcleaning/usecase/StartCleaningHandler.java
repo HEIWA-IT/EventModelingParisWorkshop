@@ -1,18 +1,18 @@
 package org.eventmodeling.startcleaning.usecase;
 
-import org.eventmodeling.startcleaning.domain.CleaningPlanning;
 import org.eventmodeling.startcleaning.domain.EventStore;
 import org.eventmodeling.startcleaning.domain.Room;
 import org.eventmodeling.startcleaning.domain.RoomCleaningStarted;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class StartCleaningHandler implements CommandHandler<StartRoomCleaning> {
     private final EventStore eventStore;
-    private final CleaningPlanning cleaningPlanning;
 
-    public StartCleaningHandler(EventStore eventStore, CleaningPlanning cleaningPlanning) {
-        this.cleaningPlanning = cleaningPlanning;
+    public StartCleaningHandler(EventStore eventStore) {
         this.eventStore = eventStore;
     }
 
@@ -23,12 +23,14 @@ public class StartCleaningHandler implements CommandHandler<StartRoomCleaning> {
             throw new NoCleaningRequestFound(room);
         }
         this.eventStore.add(new RoomCleaningStarted(room, LocalDate.now()));
-
-
     }
 
     private boolean isNotPlannedToday(Room room) {
-        return !cleaningPlanning.getRoomsToClean(LocalDate.now()).contains(room);
+        Set<ExtraCleaningRequested> events = eventStore.getEventsOfType(ExtraCleaningRequested.class);
+        return events
+                .stream()
+                .noneMatch(it -> it.getRoom().equals(room)
+                        && it.getDate().equals(LocalDate.now()));
     }
 
 }

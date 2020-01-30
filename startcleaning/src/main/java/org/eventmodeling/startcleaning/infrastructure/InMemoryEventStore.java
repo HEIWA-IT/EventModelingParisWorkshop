@@ -6,6 +6,8 @@ import org.eventmodeling.startcleaning.domain.EventStore;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class InMemoryEventStore implements EventStore {
 
@@ -18,5 +20,13 @@ public class InMemoryEventStore implements EventStore {
     @Override
     public void add(Event event) {
         events.add(event);
+    }
+
+    @Override
+    public  <T> Set<T> getEventsOfType(Class<T> type) {
+        return all().stream()
+                .filter(it -> it.getClass() == type)
+                .map(it -> (T) it)
+                .collect(Collectors.toSet());
     }
 }

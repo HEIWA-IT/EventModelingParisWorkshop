@@ -7,7 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDate;
-import java.util.Collection;
 
 public class StartCleaningHandlerTest {
 
@@ -20,13 +19,12 @@ public class StartCleaningHandlerTest {
         eventStore = new InMemoryEventStore();
         CleaningPlanning cleaningPlanning = new CleaningPlanning(); // TODO: 2020-01-30 Add repository
         eventHandler = new ExtraCleaningEventHandler(cleaningPlanning);
-        commandHandler = new StartCleaningHandler(eventStore, cleaningPlanning);
+        commandHandler = new StartCleaningHandler(eventStore);
     }
 
     @Test
     public void should_fail_generate_room_cleaning_started_event() {
         printGiven();
-        CommandHandler commandHandler = new StartCleaningHandler(eventStore, new CleaningPlanning());
 
         StartRoomCleaning command = new StartRoomCleaning(new Room(301));
         System.out.println("When :");
