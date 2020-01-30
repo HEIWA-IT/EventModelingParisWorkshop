@@ -30,7 +30,7 @@ namespace Evaluation.Features.Evaluation
 
 		public override string ToString()
 		{
-			return $"GuesId: {GuestId}, RoomNumber: {RoomNumber}, From: {From}, To: {To}, Comment: {Comment}, Ratings: [{string.Join(" ", Ratings.Select(r => r.ToString()))}]";
+			return $"GuestId: {GuestId}, RoomNumber: {RoomNumber}, From: {From}, To: {To}, Comment: {Comment}, Ratings: [{string.Join(" ", Ratings.Select(r => r.ToString()))}]";
 		}
 	}
 }
