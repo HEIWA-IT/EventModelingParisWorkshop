@@ -6,16 +6,16 @@ namespace Evaluation.Features.Evaluation
 {
 	public class InMemoryEvaluationRepository : IEvaluationRepository
 	{
-		private readonly List<EvaluationPublished> _events;
+		private readonly List<IEvent> _events;
 
 		public InMemoryEvaluationRepository()
 		{
-			_events = new List<EvaluationPublished>();
+			_events = new List<IEvent>();
 		}
 
 		public Task Save(IEvent @event)
 		{
-			_events.Add(@event as EvaluationPublished);
+			_events.Add(@event);
 			return Task.CompletedTask;
 		}
 
