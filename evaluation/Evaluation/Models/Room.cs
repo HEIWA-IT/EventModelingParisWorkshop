@@ -2,13 +2,8 @@
 {
 	public class Room : IAggregate
 	{
-        public int RoomNumber { get; set; }
+		public int RoomNumber { get; set; }
 
-        public string Status { get; set; }
-	}
-
-	public interface IAggregate
-	{
-
+		public string Status { get; set; }
 	}
 }
