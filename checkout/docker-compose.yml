@@ -1,0 +1,14 @@
+version: '3.3'
+services:
+  php-cli:
+    build: docker/php-cli
+    container_name: php-cli
+    working_dir: /application
+    volumes:
+      - .:/application
+      - ./docker/php-cli/php-ini-overrides.ini:/etc/php/7.1/fpm/conf.d/99-overrides.ini
+      - ~/.cache/composer:/.composer
+    ports:
+      - "8000:8000"
+      - "9001:9000"
+    user: "${UID}:${GID}"
