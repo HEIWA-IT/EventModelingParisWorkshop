@@ -1,7 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace App;
+namespace App\Infra;
+
+use App\Domain\Events;
+use App\Domain\Repository;
+use App\Domain\Room;
+use App\Domain\RoomException;
 
 final class InMemoryRepository implements Repository
 {

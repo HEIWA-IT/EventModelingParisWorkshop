@@ -1,16 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Tests;
+namespace App\Tests\UseCases;
 
-use App\CheckedInEvent;
-use App\CheckedOutEvent;
-use App\Events;
-use App\InMemoryRepository;
-use App\ReservationConfirmed;
-use App\RoomAvailability;
-use App\RoomsAvailability;
-use App\RoomsAvailabilityEventHandler;
+use App\Domain\CheckedInEvent;
+use App\Domain\CheckedOutEvent;
+use App\Domain\Events;
+use App\Domain\ReservationConfirmed;
+use App\Domain\RoomAvailability;
+use App\Domain\RoomsAvailability;
+use App\Infra\InMemoryRepository;
+use App\UseCases\RoomsAvailabilityEventHandler;
 use PHPUnit\Framework\TestCase;
 
 class RoomsAvailabilityEventHandlerTest extends TestCase

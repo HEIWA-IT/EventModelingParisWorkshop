@@ -1,7 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace App;
+namespace App\UseCases;
+
+use App\Domain\CheckedInEvent;
+use App\Domain\CheckedOutEvent;
+use App\Domain\Repository;
+use App\Domain\ReservationConfirmed;
+use App\Domain\RoomsAvailability;
 
 final class RoomsAvailabilityEventHandler
 {

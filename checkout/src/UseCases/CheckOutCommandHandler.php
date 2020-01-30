@@ -1,8 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace App;
+namespace App\UseCases;
 
+use App\Domain\Command;
+use App\Domain\CommandHandler;
+use App\Domain\Repository;
 use Doctrine\Common\Collections\Collection;
 
 final class CheckOutCommandHandler implements CommandHandler

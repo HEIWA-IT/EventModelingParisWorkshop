@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Tests;
+namespace App\Tests\Domain;
 
-use App\CheckedInEvent;
-use App\CheckedOutEvent;
-use App\Room;
-use App\RoomException;
+use App\Domain\CheckedInEvent;
+use App\Domain\CheckedOutEvent;
+use App\Domain\Room;
+use App\Domain\RoomException;
 use PHPUnit\Framework\TestCase;
 
 class RoomTest extends TestCase

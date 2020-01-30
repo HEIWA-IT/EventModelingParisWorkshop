@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace App;
+namespace App\Domain;
 
-final class CheckOutCommand extends Command
+final class CheckedOutEvent extends Event
 {
     public int $roomNumber;
     public \DateTimeImmutable $checkOutDate;

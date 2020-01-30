@@ -1,14 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Tests;
+namespace App\Tests\UseCases;
 
-use App\CheckedInEvent;
-use App\CheckOutCommand;
-use App\CheckOutCommandHandler;
-use App\Command;
-use App\CommandHandler;
-use App\Events;
+use App\Domain\CheckedInEvent;
+use App\Domain\CheckOutCommand;
+use App\Domain\Command;
+use App\Domain\CommandHandler;
+use App\Domain\Events;
+use App\Tests\Specification;
+use App\UseCases\CheckOutCommandHandler;
 
 class CheckOutCommandHandlerTest extends Specification
 {
