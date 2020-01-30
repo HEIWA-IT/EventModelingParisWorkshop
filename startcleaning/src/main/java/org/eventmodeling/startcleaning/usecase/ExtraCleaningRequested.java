@@ -25,4 +25,8 @@ class ExtraCleaningRequested implements Event {
     public Room getRoom() {
         return room;
     }
+
+    public LocalDate getDate() {
+        return date;
+    }
 }

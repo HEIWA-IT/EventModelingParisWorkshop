@@ -3,22 +3,15 @@ package org.eventmodeling.startcleaning.domain;
 import org.eventmodeling.startcleaning.domain.Room;
 
 import java.time.LocalDate;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
+import java.util.*;
 
 public class CleaningPlanning {
-    private Collection<Room> rooms = new HashSet<>();
+    private HashMap<LocalDate, Collection<Room>> planning = new HashMap<>();
 
-    public void add(Room room) {
+    public void add(LocalDate date, Room room) {
+        Collection<Room> rooms = Optional.ofNullable(planning.get(date)).orElse(new HashSet<>());
         rooms.add(room);
-    }
-
-    @Override
-    public String toString() {
-        return "CleaningPlanning{" +
-                "rooms=" + rooms +
-                '}';
+        planning.put(date, rooms);
     }
 
     public boolean isEmpty() {
@@ -26,6 +19,6 @@ public class CleaningPlanning {
     }
 
     public Collection<Room> getRoomsToClean(LocalDate date) {
-        return rooms;
+        return Optional.ofNullable(planning.get(date)).orElse(new HashSet<>());
     }
 }

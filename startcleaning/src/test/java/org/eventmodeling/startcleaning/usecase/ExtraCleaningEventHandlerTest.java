@@ -35,7 +35,6 @@ public class ExtraCleaningEventHandlerTest {
         );
     }
 
-
     @Test
     public void should_add_dirty_room_when_cleaning_is_requested_on_several_days() {
         LocalDate date = LocalDate.now();
