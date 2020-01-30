@@ -1,6 +1,7 @@
 package org.eventmodeling.startcleaning.exposition.cleaner;
 
 
+import org.eventmodeling.startcleaning.domain.CleaningPlanning;
 import org.eventmodeling.startcleaning.infrastructure.InMemoryEventStore;
 import org.eventmodeling.startcleaning.usecase.StartCleaningHandler;
 import org.eventmodeling.startcleaning.usecase.StartRoomCleaning;
@@ -14,7 +15,7 @@ public class RoomController {
     private final StartCleaningHandler startCleaningHandler;
 
     public RoomController() {
-        this.startCleaningHandler = new StartCleaningHandler(new InMemoryEventStore());
+        this.startCleaningHandler = new StartCleaningHandler(new InMemoryEventStore(), new CleaningPlanning());
     }
 
     @PostMapping("/xtra-cleaning/room/{roomId}/start")

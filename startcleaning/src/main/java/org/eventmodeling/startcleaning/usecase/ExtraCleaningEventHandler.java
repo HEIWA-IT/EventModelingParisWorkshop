@@ -2,8 +2,6 @@ package org.eventmodeling.startcleaning.usecase;
 
 import org.eventmodeling.startcleaning.domain.CleaningPlanning;
 
-import java.time.LocalDate;
-
 public class ExtraCleaningEventHandler {
     private CleaningPlanning cleaningPlanning;
 
