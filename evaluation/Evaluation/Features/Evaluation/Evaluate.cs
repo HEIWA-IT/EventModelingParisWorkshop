@@ -17,5 +17,9 @@ namespace Evaluation.Features.Evaluation
 
 		public Rating[] Ratings { get; set; }
 
+		public override string ToString()
+		{
+			return $"GuesId: {GuestId}, RoomNumber: {RoomNumber}, From: {From}, To: {To}, Comment: {Comment}";
+		}
 	}
 }

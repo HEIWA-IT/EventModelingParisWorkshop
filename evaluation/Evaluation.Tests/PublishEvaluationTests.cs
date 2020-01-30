@@ -82,13 +82,14 @@ namespace Evaluation.Tests
 		[Fact]
 		public void PrintDocumentation()
 		{
-			//_output.WriteLine(Given()?.ToString());
-			_output.WriteLine(When().ToString());
+			_output.WriteLine($"Given: {Given()}");
+			_output.WriteLine($"When: {When()}");
 			Publish_an_evaluation_create_an_review_published_event();
 
+			_output.WriteLine("Expected:");
 			foreach (IEvent @event in ProducedEvent)
 			{
-				_output.WriteLine(@event.ToString());
+				_output.WriteLine($"\t{@event}");
 			}
 		}
 

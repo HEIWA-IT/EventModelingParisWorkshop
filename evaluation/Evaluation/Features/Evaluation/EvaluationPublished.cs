@@ -1,5 +1,6 @@
 ﻿using Evaluation.Common;
 using System;
+using System.Linq;
 
 namespace Evaluation.Features.Evaluation
 {
@@ -25,6 +26,11 @@ namespace Evaluation.Features.Evaluation
 			To = to;
 			Comment = comment;
 			Ratings = ratings;
+		}
+
+		public override string ToString()
+		{
+			return $"GuesId: {GuestId}, RoomNumber: {RoomNumber}, From: {From}, To: {To}, Comment: {Comment}, Ratings: [{string.Join(" ", Ratings.Select(r => r.ToString()))}]";
 		}
 	}
 }
