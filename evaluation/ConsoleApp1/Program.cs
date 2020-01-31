@@ -30,16 +30,30 @@ namespace ConsoleApp1
 					}
 
 					Console.WriteLine();
+					Task.Delay(100000).Wait();
+				}
+			}).Wait(1);
 
-					// WRITE
-					var message = new Evaluation("Super", 12);
-					string serializeObject = JsonConvert.SerializeObject(message);
-					byte[] bytes = Encoding.UTF8.GetBytes(serializeObject);
-					var eventData = new EventData(Guid.NewGuid(), streamName, true, bytes, null);
-					WriteResult result = session.AppendToStreamAsync(streamName, ExpectedVersion.Any, eventData).Result;
-					Console.WriteLine("Write event with data: {0}, metadata: {1}",
-						Encoding.UTF8.GetString(eventData.Data),
-						Encoding.UTF8.GetString(eventData.Metadata));
+			Task.Run(() =>
+			{
+				while (true)
+				{
+					Task.Delay(20000).Wait();
+
+					using (IEventStoreConnection session = EventStoreConnection.Create(new IPEndPoint(IPAddress.Loopback, 1113)))
+					{
+						session.ConnectAsync().Wait();
+
+						// WRITE
+						var message = new Evaluation("Super", 12);
+						string serializeObject = JsonConvert.SerializeObject(message);
+						byte[] bytes = Encoding.UTF8.GetBytes(serializeObject);
+						var eventData = new EventData(Guid.NewGuid(), streamName, true, bytes, null);
+						WriteResult result = session.AppendToStreamAsync(streamName, ExpectedVersion.Any, eventData).Result;
+						Console.WriteLine("Write event with data: {0}, metadata: {1}",
+							Encoding.UTF8.GetString(eventData.Data),
+							Encoding.UTF8.GetString(eventData.Metadata));
+					}
 				}
 			}).Wait(1);
 
