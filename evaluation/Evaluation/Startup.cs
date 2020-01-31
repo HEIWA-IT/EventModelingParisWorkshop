@@ -22,8 +22,10 @@ namespace Evaluation
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddScoped<IEvaluationRepository, InMemoryEvaluationRepository>();
+            services.AddScoped<IEvaluationRepository, EventStoreRepository>();
             services.AddScoped<IHandle<Evaluate>, EvaluateHandler>();
+
+            services.AddHostedService<EvaluationReaderBackgroundService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

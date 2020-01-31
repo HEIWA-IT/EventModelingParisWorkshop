@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Evaluation.Common;
 
 namespace Evaluation.Features.Evaluation
@@ -22,6 +23,8 @@ namespace Evaluation.Features.Evaluation
                 command.Ratings);
 
             await _repo.Save(evt);
+
+           // var @event = _repo.GetEvents().ToList();
         }
     }
 }
