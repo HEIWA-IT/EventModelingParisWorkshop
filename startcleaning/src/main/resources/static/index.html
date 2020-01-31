@@ -8,67 +8,11 @@
     <div id=root></div>
 
     <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
-    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="ext_assets/react.development.js"></script>
+    <script src="ext_assets/react-dom.development.js"></script>
+    <script src="ext_assets/babel.min.js"></script>
 
-    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
-
-   
-    <script type="text/babel">
-
-      class App extends React.Component {
-        render() {
-          
-          return (
-            <div>
-              <div>Room 301 <StartCleaningButton roomId="301" /></div>
-              <div>Room 302 <StartCleaningButton roomId="302" /></div>
-              <div>Room 303 <StartCleaningButton roomId="303" /></div>
-              <div>Room 304 <StartCleaningButton roomId="304" /></div>
-            </div>
-          )
-        }
-      }
-
-      class StartCleaningButton extends React.Component {
-
-          state = {
-            started: false
-          };
-
-          render() {
-
-              if (this.state.started) {
-                  return 'Cleaning started';
-              }
-            
-              return (
-                  <button onClick={() => this.startCleaning(this.props.roomId)}>
-                    Start Cleaning 
-                  </button>
-              );
-          }
-
-          startCleaning = (roomId) => {
-              this.setState({started: true});
-
-              fetch("http://localhost:8080/xtra-cleaning/room/" + roomId + "/start", {
-                method: 'POST',
-                //body: JSON.stringify({roomId}),
-                headers: {
-                  'Content-Type': 'application/json'
-              }})
-              .then(httpResult => res.json())
-              .then(jsonData => {
-                  console.log("got: ", jsonData);
-              })
-              .catch(error => console.log("something wrong happened: ", error));
-          }
-      }
-
-      ReactDOM.render(<App />, document.getElementById('root'))
-
-    </script>
+    <script type="text/babel" src="js/app.js"></script>
 
   </body>
 

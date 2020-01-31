@@ -15,10 +15,11 @@ public class CleaningPlanningController {
 
     }
 
-    @GetMapping
+    @GetMapping("/xtra-cleaning/room")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity greeting(@PathVariable(value = "roomId") String roomId) {
-        return ResponseEntity.ok().build();
+    public ResponseEntity roomsToClean() {
+        String roomsToClean = "{\"rooms\": [\"301\", \"302\", \"303\"]  }";
+        return ResponseEntity.ok().body(roomsToClean);
     }
 
 }
