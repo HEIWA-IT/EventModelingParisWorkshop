@@ -1,10 +1,11 @@
 ﻿using System;
 using Evaluation.Common;
 
-namespace Evaluation.Features.Evaluation
+namespace Evaluation.Features.GuestEvaluations
 {
 	public class RoomCheckedIn : IEvent
 	{
+        public Guid GuestId { get; set; }
 		public string CustomerFirstName { get; set; }
 		public string CustomerLastName { get; set; }
 		public int RoomNumber { get; set; }
