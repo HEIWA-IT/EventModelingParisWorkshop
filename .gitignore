@@ -83,3 +83,6 @@ evaluation/Evaluation.Domain/obj
 /.vs
 /evaluation/Evaluation/obj
 /evaluation/Evaluation.Tests/obj
+/evaluation/ConsoleApp1/obj/Debug
+/evaluation/ConsoleApplication1/obj
+/evaluation/packages
