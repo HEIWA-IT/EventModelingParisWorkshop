@@ -17,6 +17,18 @@ final class InMemoryRepository implements Repository
         $this->events = $events;
     }
 
+    public function store(Events $raisedEvents)
+    {
+        foreach ($raisedEvents as $raisedEvent) {
+            $this->events->add($raisedEvent);
+        }
+    }
+
+    public function getAllEvents(): Events
+    {
+        return $this->events;
+    }
+
     public function getRoomByRoomNumber(int $roomNumber): Room
     {
         $roomEvents = $this->events->filter(
@@ -30,17 +42,5 @@ final class InMemoryRepository implements Repository
         }
 
         return Room::fromEvents($roomEvents);
-    }
-
-    public function getAllEvents(): Events
-    {
-        return $this->events;
-    }
-
-    public function store(Events $raisedEvents)
-    {
-        foreach ($raisedEvents as $raisedEvent) {
-            $this->events->add($raisedEvent);
-        }
     }
 }

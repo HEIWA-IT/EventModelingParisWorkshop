@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 final class Events extends ArrayCollection
 {
-    public function current(): Event
+    public function current(): EventFunctions
     {
         return parent::current();
     }

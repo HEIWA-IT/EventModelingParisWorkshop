@@ -5,9 +5,9 @@ namespace App\Domain;
 
 interface Repository
 {
-    public function getAllEvents(): Events;
-
     public function store(Events $raisedEvents);
+
+    public function getAllEvents(): Events;
 
     public function getRoomByRoomNumber(int $roomNumber): Room;
 }
