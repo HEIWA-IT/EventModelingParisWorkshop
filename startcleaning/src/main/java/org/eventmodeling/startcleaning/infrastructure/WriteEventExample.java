@@ -1,41 +1,19 @@
 package org.eventmodeling.startcleaning.infrastructure;
 
-import akka.actor.*;
-import akka.event.Logging;
-import akka.event.LoggingAdapter;
-import eventstore.akka.tcp.ConnectionActor;
-import eventstore.core.*;
-import eventstore.j.EventDataBuilder;
-import eventstore.j.WriteEventsBuilder;
-import org.eventmodeling.startcleaning.domain.Event;
-import org.eventmodeling.startcleaning.domain.EventStore;
-
-import java.util.Collection;
-import java.util.Set;
 import java.util.UUID;
+import akka.actor.*;
+import akka.event.*;
+import eventstore.j.*;
+import eventstore.core.*;
+import eventstore.akka.tcp.ConnectionActor;
 
-public class RealEventStore implements EventStore {
+public class WriteEventExample {
 
-    public RealEventStore() {
-
-    }
-
-    @Override
-    public Collection<Event> all() {
-        return null;
-    }
-
-    @Override
-    public void add(Event eventd) {
-        addd();
-    }
-
-    public static void addd() {
+    public static void main(String[] args) {
 
         final ActorSystem system   = ActorSystem.create();
         final ActorRef connection  = system.actorOf(ConnectionActor.getProps());
-        final ActorRef writeResult = system.actorOf(Props.create(WriteEventExample.WriteResult.class));
-
+        final ActorRef writeResult = system.actorOf(Props.create(WriteResult.class));
 
         final EventData event = new EventDataBuilder("my-event")
                 .eventId(UUID.randomUUID())
@@ -43,17 +21,14 @@ public class RealEventStore implements EventStore {
                 .metadata("my first event")
                 .build();
 
-        final WriteEvents writeEvents = new WriteEventsBuilder("laurent_archimede")
+        final WriteEvents writeEvents = new WriteEventsBuilder("lllll")
                 .addEvent(event)
                 .expectAnyVersion()
                 .build();
 
         connection.tell(writeEvents, writeResult);
-    }
 
-    @Override
-    public <T> Set<T> getEventsOfType(Class<T> type) {
-        return null;
+        RealEventStore.addd();
     }
 
     public static class WriteResult extends AbstractActor {
@@ -76,4 +51,3 @@ public class RealEventStore implements EventStore {
 
     }
 }
-

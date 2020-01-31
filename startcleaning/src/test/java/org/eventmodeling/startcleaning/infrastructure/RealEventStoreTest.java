@@ -8,7 +8,6 @@ class RealEventStoreTest {
 
     @Test
     void add() {
-        new RealEventStore().add(null);
-
+        RealEventStore.addd();
     }
 }
