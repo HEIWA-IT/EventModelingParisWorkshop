@@ -4,12 +4,12 @@ declare(strict_types=1);
 namespace App\Tests\UseCases;
 
 use App\Domain\CheckedInEvent;
-use App\Domain\CheckOutCommand;
-use App\Domain\Command;
-use App\Domain\CommandHandler;
 use App\Domain\Events;
 use App\Tests\Specification;
+use App\UseCases\CheckOutCommand;
 use App\UseCases\CheckOutCommandHandler;
+use App\UseCases\Command;
+use App\UseCases\CommandHandler;
 
 class CheckOutCommandHandlerTest extends Specification
 {

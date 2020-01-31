@@ -3,10 +3,8 @@ declare(strict_types=1);
 
 namespace App\UseCases;
 
-use App\Domain\Command;
-use App\Domain\CommandHandler;
+use App\Domain\Events;
 use App\Domain\Repository;
-use Doctrine\Common\Collections\Collection;
 
 final class CheckOutCommandHandler implements CommandHandler
 {
@@ -17,7 +15,7 @@ final class CheckOutCommandHandler implements CommandHandler
         $this->repository = $repository;
     }
 
-    public function handle(Command $command): Collection
+    public function handle(Command $command): Events
     {
         $room = $this->repository->getRoomByRoomNumber($command->roomNumber);
 

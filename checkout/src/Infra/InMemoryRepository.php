@@ -20,7 +20,9 @@ final class InMemoryRepository implements Repository
     public function getRoomByRoomNumber(int $roomNumber): Room
     {
         $roomEvents = $this->events->filter(
-            fn($event) => $event->roomNumber === $roomNumber
+            function ($event) use ($roomNumber) {
+                return $event->roomNumber === $roomNumber;
+            }
         );
 
         if ($roomEvents->isEmpty()) {

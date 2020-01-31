@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 namespace App\Tests;
 
-use App\Domain\Command;
-use App\Domain\CommandHandler;
 use App\Domain\Events;
 use App\Domain\Repository;
 use App\Infra\InMemoryRepository;
+use App\UseCases\Command;
+use App\UseCases\CommandHandler;
 use PHPUnit\Framework\TestCase;
 
 abstract class Specification extends TestCase

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Domain;
+namespace App\UseCases;
 
 abstract class Command
 {
