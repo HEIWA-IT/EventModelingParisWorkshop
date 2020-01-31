@@ -28,7 +28,7 @@ public class WriteEventExample {
 
         connection.tell(writeEvents, writeResult);
 
-        RealEventStore.addd();
+        new RealEventStore().add(null);
     }
 
     public static class WriteResult extends AbstractActor {

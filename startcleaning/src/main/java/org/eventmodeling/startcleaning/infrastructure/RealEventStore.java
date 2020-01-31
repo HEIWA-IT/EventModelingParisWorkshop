@@ -16,6 +16,12 @@ import java.util.UUID;
 
 public class RealEventStore implements EventStore {
 
+
+    final ActorSystem system   = ActorSystem.create();
+    final ActorRef connection  = system.actorOf(ConnectionActor.getProps());
+    final ActorRef writeResult = system.actorOf(Props.create(WriteEventExample.WriteResult.class));
+
+
     public RealEventStore() {
 
     }
@@ -27,23 +33,13 @@ public class RealEventStore implements EventStore {
 
     @Override
     public void add(Event eventd) {
-        addd();
-    }
-
-    public static void addd() {
-
-        final ActorSystem system   = ActorSystem.create();
-        final ActorRef connection  = system.actorOf(ConnectionActor.getProps());
-        final ActorRef writeResult = system.actorOf(Props.create(WriteEventExample.WriteResult.class));
-
-
         final EventData event = new EventDataBuilder("my-event")
                 .eventId(UUID.randomUUID())
                 .data("my event data")
                 .metadata("my first event")
                 .build();
 
-        final WriteEvents writeEvents = new WriteEventsBuilder("laurent_archimede")
+        final WriteEvents writeEvents = new WriteEventsBuilder("laurent_arc")
                 .addEvent(event)
                 .expectAnyVersion()
                 .build();

@@ -1,13 +1,17 @@
 package org.eventmodeling.startcleaning.infrastructure;
 
+import eventstore.core.EventData;
+import eventstore.core.WriteEvents;
+import eventstore.j.EventDataBuilder;
+import eventstore.j.WriteEventsBuilder;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.UUID;
 
 class RealEventStoreTest {
 
     @Test
     void add() {
-        RealEventStore.addd();
+        new RealEventStore().add(null);
     }
 }
