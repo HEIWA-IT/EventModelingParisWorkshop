@@ -5,24 +5,24 @@ namespace App\UseCases;
 
 use App\Domain\CheckedInEvent;
 use App\Domain\CheckedOutEvent;
-use App\Domain\EventStore;
+use App\Domain\Repository;
 use App\Domain\ReservationConfirmed;
 use App\Domain\RoomsAvailability;
 
 final class RoomsAvailabilityEventHandler
 {
-    private EventStore $eventStore;
+    private Repository $repository;
 
-    public function __construct(EventStore $eventStore)
+    public function __construct(Repository $repository)
     {
-        $this->eventStore = $eventStore;
+        $this->repository = $repository;
     }
 
     public function getView(\DateTimeImmutable $atDate): RoomsAvailability
     {
         $roomsAvailability = RoomsAvailability::generate(3);
 
-        foreach ($this->eventStore->getAllEvents() as $event) {
+        foreach ($this->repository->getAllEvents() as $event) {
             if ($event instanceof CheckedInEvent) {
                 $roomsAvailability->makeUnavailable($event->roomNumber);
             }

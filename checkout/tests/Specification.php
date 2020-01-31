@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace App\Tests;
 
 use App\Domain\Events;
-use App\Domain\EventStore;
-use App\Infra\InMemoryEventStore;
+use App\Domain\Repository;
+use App\Infra\InMemoryRepository;
 use App\UseCases\Command;
 use App\UseCases\CommandHandler;
 use PHPUnit\Framework\TestCase;
@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 abstract class Specification extends TestCase
 {
     protected Events $events;
-    protected EventStore $eventStore;
+    protected Repository $repository;
     protected CommandHandler $handler;
     protected Events $produced;
 
@@ -26,10 +26,10 @@ abstract class Specification extends TestCase
     public function setUp(): void
     {
         $this->events = $this->Given();
-        $this->eventStore = new InMemoryEventStore($this->events);
+        $this->repository = new InMemoryRepository($this->events);
         $this->handler = $this->OnHandler($this->When());
         $this->handler->handle($this->When());
-        $this->produced = $this->eventStore->getAllEvents();
+        $this->produced = $this->repository->getAllEvents();
     }
 
     public function PrintDocumentation(Specification $specification)

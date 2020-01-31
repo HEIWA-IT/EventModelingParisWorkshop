@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Domain;
 
-interface EventStore
+interface Repository
 {
     public function getAllEvents(): Events;
 

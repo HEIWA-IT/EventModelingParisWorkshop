@@ -4,11 +4,11 @@ declare(strict_types=1);
 namespace App\Infra;
 
 use App\Domain\Events;
-use App\Domain\EventStore;
+use App\Domain\Repository;
 use App\Domain\Room;
 use App\Domain\RoomException;
 
-final class InMemoryEventStore implements EventStore
+final class InMemoryRepository implements Repository
 {
     private Events $events;
 

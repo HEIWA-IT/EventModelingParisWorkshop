@@ -31,7 +31,7 @@ class CheckOutCommandHandlerTest extends Specification
     function OnHandler(Command $command): CommandHandler
     {
         // TODO should get the handler from a map, indexed by commands
-        return new CheckOutCommandHandler($this->eventStore);
+        return new CheckOutCommandHandler($this->repository);
     }
 
     /**
