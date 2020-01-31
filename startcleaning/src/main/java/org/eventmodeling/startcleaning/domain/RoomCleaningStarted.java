@@ -34,4 +34,14 @@ public class RoomCleaningStarted implements Event {
                 ", date=" + cleaningDate +
                 '}';
     }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public LocalDate getCleaningDate() {
+        return cleaningDate;
+    }
+
+
 }

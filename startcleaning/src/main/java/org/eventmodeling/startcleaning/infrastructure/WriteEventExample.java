@@ -1,34 +1,23 @@
 package org.eventmodeling.startcleaning.infrastructure;
 
+import java.time.LocalDate;
 import java.util.UUID;
 import akka.actor.*;
 import akka.event.*;
 import eventstore.j.*;
 import eventstore.core.*;
 import eventstore.akka.tcp.ConnectionActor;
+import org.eventmodeling.startcleaning.domain.Room;
+import org.eventmodeling.startcleaning.domain.RoomCleaningStarted;
+import org.eventmodeling.startcleaning.infrastructure.filesystem.adapter.RoomCleaningStartedAdapter;
+import org.eventmodeling.startcleaning.usecase.ExtraCleaningRequested;
 
 public class WriteEventExample {
 
     public static void main(String[] args) {
-
-        final ActorSystem system   = ActorSystem.create();
-        final ActorRef connection  = system.actorOf(ConnectionActor.getProps());
-        final ActorRef writeResult = system.actorOf(Props.create(WriteResult.class));
-
-        final EventData event = new EventDataBuilder("my-event")
-                .eventId(UUID.randomUUID())
-                .data("my event data")
-                .metadata("my first event")
-                .build();
-
-        final WriteEvents writeEvents = new WriteEventsBuilder("lllll")
-                .addEvent(event)
-                .expectAnyVersion()
-                .build();
-
-        connection.tell(writeEvents, writeResult);
-
-        new RealEventStore().add(null);
+        RealEventStore realEventStore = new RealEventStore();
+        realEventStore.adapter(RoomCleaningStarted.class, new RoomCleaningStartedAdapter());
+        realEventStore.add(new RoomCleaningStarted(new Room(301), LocalDate.now()));
     }
 
     public static class WriteResult extends AbstractActor {

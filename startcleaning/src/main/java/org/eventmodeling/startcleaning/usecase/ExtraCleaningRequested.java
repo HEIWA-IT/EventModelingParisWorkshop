@@ -5,7 +5,7 @@ import org.eventmodeling.startcleaning.domain.Room;
 
 import java.time.LocalDate;
 
-class ExtraCleaningRequested implements Event {
+public class ExtraCleaningRequested implements Event {
     private final LocalDate date;
     private final Room room;
 
