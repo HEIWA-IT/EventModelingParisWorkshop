@@ -7,10 +7,10 @@ use App\Domain\CheckedInEvent;
 use App\Domain\Events;
 use App\Domain\Room;
 use App\Domain\RoomException;
-use App\Infra\InMemoryRepository;
+use App\Infra\InMemoryEventStore;
 use PHPUnit\Framework\TestCase;
 
-class InMemoryRepositoryTest extends TestCase
+class InMemoryEventStoreTest extends TestCase
 {
     /**
      * @test
@@ -21,7 +21,7 @@ class InMemoryRepositoryTest extends TestCase
         $this->expectException(RoomException::class);
 
         // given
-        $tested = new InMemoryRepository(new Events());
+        $tested = new InMemoryEventStore(new Events());
 
         // when
         $tested->getRoomByRoomNumber(304);
@@ -36,7 +36,7 @@ class InMemoryRepositoryTest extends TestCase
         $this->expectException(RoomException::class);
 
         // given
-        $tested = new InMemoryRepository(new Events([
+        $tested = new InMemoryEventStore(new Events([
             new CheckedInEvent(404)
         ]));
 
@@ -55,7 +55,7 @@ class InMemoryRepositoryTest extends TestCase
         ]);
         $expectedRoom = Room::fromEvents($events);
 
-        $tested = new InMemoryRepository($events);
+        $tested = new InMemoryEventStore($events);
 
         // when
         $room = $tested->getRoomByRoomNumber(304);

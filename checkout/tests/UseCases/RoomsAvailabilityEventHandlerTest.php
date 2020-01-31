@@ -9,7 +9,7 @@ use App\Domain\Events;
 use App\Domain\ReservationConfirmed;
 use App\Domain\RoomAvailability;
 use App\Domain\RoomsAvailability;
-use App\Infra\InMemoryRepository;
+use App\Infra\InMemoryEventStore;
 use App\UseCases\RoomsAvailabilityEventHandler;
 use PHPUnit\Framework\TestCase;
 
@@ -22,8 +22,8 @@ class RoomsAvailabilityEventHandlerTest extends TestCase
     {
         // given
         $events = new Events([]);
-        $repository = new InMemoryRepository($events);
-        $tested = new RoomsAvailabilityEventHandler($repository);
+        $eventStore = new InMemoryEventStore($events);
+        $tested = new RoomsAvailabilityEventHandler($eventStore);
 
         // when
         $roomsAvailability = $tested->getView(\DateTimeImmutable::createFromFormat('Y-m-d', '2020-02-18'));
@@ -44,8 +44,8 @@ class RoomsAvailabilityEventHandlerTest extends TestCase
         $events = new Events([
             new CheckedInEvent(3)
         ]);
-        $repository = new InMemoryRepository($events);
-        $tested = new RoomsAvailabilityEventHandler($repository);
+        $eventStore = new InMemoryEventStore($events);
+        $tested = new RoomsAvailabilityEventHandler($eventStore);
 
         // when
         $roomsAvailability = $tested->getView(\DateTimeImmutable::createFromFormat('Y-m-d', '2020-02-18'));
@@ -74,8 +74,8 @@ class RoomsAvailabilityEventHandlerTest extends TestCase
             new CheckedInEvent(2),
             new CheckedOutEvent(1, \DateTimeImmutable::createFromFormat('Y-m-d', '2020-01-18')),
         ]);
-        $repository = new InMemoryRepository($events);
-        $tested = new RoomsAvailabilityEventHandler($repository);
+        $eventStore = new InMemoryEventStore($events);
+        $tested = new RoomsAvailabilityEventHandler($eventStore);
 
         // when
         $roomsAvailability = $tested->getView(\DateTimeImmutable::createFromFormat('Y-m-d', '2020-02-18'));
@@ -109,8 +109,8 @@ class RoomsAvailabilityEventHandlerTest extends TestCase
                 \DateTimeImmutable::createFromFormat('Y-m-d', '2020-04-30')
             ),
         ]);
-        $repository = new InMemoryRepository($events);
-        $tested = new RoomsAvailabilityEventHandler($repository);
+        $eventStore = new InMemoryEventStore($events);
+        $tested = new RoomsAvailabilityEventHandler($eventStore);
 
         // when
         $roomsAvailability = $tested->getView(\DateTimeImmutable::createFromFormat('Y-m-d', '2020-02-15'));

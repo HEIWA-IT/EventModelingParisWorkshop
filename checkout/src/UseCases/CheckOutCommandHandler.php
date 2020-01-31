@@ -4,24 +4,24 @@ declare(strict_types=1);
 namespace App\UseCases;
 
 use App\Domain\Events;
-use App\Domain\Repository;
+use App\Domain\EventStore;
 
 final class CheckOutCommandHandler implements CommandHandler
 {
-    private Repository $repository;
+    private EventStore $eventStore;
 
-    public function __construct(Repository $repository)
+    public function __construct(EventStore $eventStore)
     {
-        $this->repository = $repository;
+        $this->eventStore = $eventStore;
     }
 
     public function handle(Command $command): Events
     {
-        $room = $this->repository->getRoomByRoomNumber($command->roomNumber);
+        $room = $this->eventStore->getRoomByRoomNumber($command->roomNumber);
 
         $room->checkOut($command->checkOutDate);
 
-        $this->repository->store($room->getRaisedEvents());
+        $this->eventStore->store($room->getRaisedEvents());
 
         return $room->getRaisedEvents();
     }
