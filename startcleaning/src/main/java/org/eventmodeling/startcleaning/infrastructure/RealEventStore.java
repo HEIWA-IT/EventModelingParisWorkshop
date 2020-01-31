@@ -1,11 +1,12 @@
 package org.eventmodeling.startcleaning.infrastructure;
 
-import akka.actor.*;
-import akka.event.Logging;
-import akka.event.LoggingAdapter;
+import akka.actor.ActorRef;
+import akka.actor.ActorSystem;
+import akka.actor.Props;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import eventstore.akka.tcp.ConnectionActor;
-import eventstore.core.*;
+import eventstore.core.EventData;
+import eventstore.core.WriteEvents;
 import eventstore.j.EventDataBuilder;
 import eventstore.j.WriteEventsBuilder;
 import org.eventmodeling.startcleaning.domain.Event;
@@ -18,17 +19,16 @@ import java.util.*;
 
 public class RealEventStore implements EventStore {
 
+    private final ActorSystem system;
+    private final ActorRef connection;
+    private final ActorRef writeResult;
 
-    final ActorSystem system   = ActorSystem.create();
-    final ActorRef connection  = system.actorOf(ConnectionActor.getProps());
-    final ActorRef writeResult = system.actorOf(Props.create(WriteEventExample.WriteResult.class));
-
-
-    private Map<Class, EventAdapter> allAdapter = new HashMap<>();
-
+    private final Map<Class, EventAdapter> allAdapter = new HashMap<>();
 
     public RealEventStore() {
-
+        system = ActorSystem.create();
+        connection = system.actorOf(ConnectionActor.getProps());
+        writeResult = system.actorOf(Props.create(WriteEventExample.WriteResult.class));
     }
 
 
@@ -43,7 +43,6 @@ public class RealEventStore implements EventStore {
 
     @Override
     public void add(Event eventd) {
-
         FileEvent fileEvent = toFileEvent(eventd);
         String json = "";
         try {
@@ -66,7 +65,6 @@ public class RealEventStore implements EventStore {
         connection.tell(writeEvents, writeResult);
     }
 
-
     private String writeJsonToFile(FileEvent fileEvent) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.writeValueAsString(fileEvent);
@@ -80,26 +78,6 @@ public class RealEventStore implements EventStore {
     @Override
     public <T> Set<T> getEventsOfType(Class<T> type) {
         return null;
-    }
-
-    public static class WriteResult extends AbstractActor {
-
-        final LoggingAdapter log = Logging.getLogger(getContext().system(), this);
-
-        @Override
-        public Receive createReceive() {
-            return receiveBuilder()
-                    .match(WriteEventsCompleted.class, m -> {
-                        log.info("range: {}, position: {}", m.numbersRange(), m.position());
-                        context().system().terminate();
-                    })
-                    .match(Status.Failure.class, f -> {
-                        final EsException exception = (EsException) f.cause();
-                        log.error(exception, exception.toString());
-                    })
-                    .build();
-        }
-
     }
 }
 
