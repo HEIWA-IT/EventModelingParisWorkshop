@@ -2,23 +2,23 @@ package com.github.newlight77.uc.checkin;
 
 import com.github.newlight77.events.EventListener;
 import com.github.newlight77.events.EventStore;
+import com.github.newlight77.repository.RoomPublisher;
 import com.github.newlight77.repository.database.HotelDatabase;
-import com.github.newlight77.repository.RoomReadRepository;
 import com.github.newlight77.specification.Beha4j;
 import org.json.simple.JSONObject;
-import org.junit.Test;
 
 import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RoomCheckinTest {
-
-    @Test
-    public void should_process_room_checkin_event() {
+    //    @Test
+    //    public void should_process_room_checkin_event() {
+    public static void main(String[] args) {
 
         final HotelDatabase database = new HotelDatabase();
-        final EventStore eventStore = new EventStore();
+        final RoomPublisher roomPublisher = new RoomPublisher();
+        final EventStore eventStore = new EventStore(roomPublisher);
         final CheckinCommand.CheckinCommandBuilder builder = CheckinCommand.builder();
         final CheckinRoomHandler handler = new CheckinRoomHandler(eventStore);
         final TestEventListener listener = new TestEventListener();
@@ -49,11 +49,12 @@ public class RoomCheckinTest {
         .print();
     }
 
-    private class TestEventListener implements EventListener {
+    private static class TestEventListener implements EventListener {
         JSONObject eventThrown;
         @Override
         public void onEvent(JSONObject event) {
             eventThrown = event;
         }
     }
+
 }

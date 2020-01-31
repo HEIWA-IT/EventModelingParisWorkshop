@@ -1,6 +1,8 @@
 package com.github.newlight77.uc.availability;
 
 import com.github.newlight77.events.EventStore;
+import com.github.newlight77.repository.RoomPublisher;
+import com.github.newlight77.repository.RoomSubscriber;
 import com.github.newlight77.repository.RoomWriteRepository;
 import com.github.newlight77.uc.checkin.CheckinCommand;
 import com.github.newlight77.uc.checkin.CheckinRoomHandler;
@@ -16,12 +18,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class RoomAvailabilityProcessorTest {
 
-    final EventStore eventStore = new EventStore();
+    final RoomPublisher roomPublisher = new RoomPublisher();
+    final RoomSubscriber roomSubscriber = new RoomSubscriber();
+    final EventStore eventStore = new EventStore(roomPublisher);
     final HotelDatabase database = new HotelDatabase(4);
     final RoomReadRepository readRepository = new RoomReadRepository(database);
-    final RoomWriteRepository writeRepository = new RoomWriteRepository(database);
-    final RoomAvailabilityProcessor availabilityHandler = new RoomAvailabilityProcessor(readRepository, writeRepository, eventStore);
+    final RoomWriteRepository writeRepository = new RoomWriteRepository(roomPublisher, database);
+    final RoomAvailabilityProcessor availabilityHandler = new RoomAvailabilityProcessor(readRepository, writeRepository, roomSubscriber, eventStore);
     final CheckinRoomHandler checkinHandler = new CheckinRoomHandler(eventStore);
+
+    public static void main(String[] args) {
+        RoomAvailabilityProcessorTest test = new RoomAvailabilityProcessorTest();
+        test.should_return_all_rooms_are_available_when_hotel_just_opened();
+        test.should_return_no_available_rooms_when_hotel_just_opened();
+        test.should_upadate_availability_when_checkin_is_done();
+    }
 
     @Test
     public void should_return_all_rooms_are_available_when_hotel_just_opened() {

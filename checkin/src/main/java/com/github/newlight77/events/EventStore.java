@@ -1,5 +1,6 @@
 package com.github.newlight77.events;
 
+import com.github.newlight77.repository.RoomPublisher;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -22,6 +23,13 @@ public class EventStore {
         listeners.add(listener);
     }
 
+    private RoomPublisher publisher;
+
+    public EventStore(RoomPublisher publisher) {
+        this.publisher = publisher;
+    }
+
+
     public void eventFired(JSONObject json) {
         this.storeEvent(json);
         this.notifyListeners(json);
@@ -30,6 +38,7 @@ public class EventStore {
     private void storeEvent(JSONObject json) {
         FileWriter writer = null;
         try {
+            publisher.publish(json);
             new File(pathname).mkdirs();
             writer = new FileWriter("./tmp/events/checkin/rooms.json");
             writer.write(json.toJSONString());
