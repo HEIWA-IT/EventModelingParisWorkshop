@@ -117,9 +117,6 @@
     "marc-mabe/php-enum": {
         "version": "v3.1.1"
     },
-    "monolog/monolog": {
-        "version": "2.0.2"
-    },
     "myclabs/deep-copy": {
         "version": "1.9.5"
     },
@@ -261,9 +258,6 @@
             "config/packages/sensio_framework_extra.yaml"
         ]
     },
-    "symfony/asset": {
-        "version": "v5.0.3"
-    },
     "symfony/cache": {
         "version": "v5.0.3"
     },
@@ -363,12 +357,6 @@
             "src/Kernel.php"
         ]
     },
-    "symfony/http-client": {
-        "version": "v5.0.3"
-    },
-    "symfony/http-client-contracts": {
-        "version": "v2.0.1"
-    },
     "symfony/http-foundation": {
         "version": "v5.0.3"
     },
@@ -393,51 +381,16 @@
     "symfony/mime": {
         "version": "v5.0.3"
     },
-    "symfony/monolog-bridge": {
-        "version": "v5.0.3"
-    },
-    "symfony/monolog-bundle": {
-        "version": "3.3",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "3.3",
-            "ref": "222b46a1bb02cd04bbc59700adec2f44f1a644b7"
-        },
-        "files": [
-            "config/packages/dev/monolog.yaml",
-            "config/packages/prod/monolog.yaml",
-            "config/packages/test/monolog.yaml"
-        ]
-    },
-    "symfony/notifier": {
-        "version": "5.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "5.0",
-            "ref": "c31585e252b32fe0e1f30b1f256af553f4a06eb9"
-        },
-        "files": [
-            "config/packages/notifier.yaml"
-        ]
-    },
     "symfony/options-resolver": {
         "version": "v5.0.3"
     },
     "symfony/orm-pack": {
         "version": "v1.0.7"
     },
-    "symfony/polyfill-intl-grapheme": {
-        "version": "v1.13.1"
-    },
     "symfony/polyfill-intl-icu": {
         "version": "v1.13.1"
     },
     "symfony/polyfill-intl-idn": {
-        "version": "v1.13.1"
-    },
-    "symfony/polyfill-intl-normalizer": {
         "version": "v1.13.1"
     },
     "symfony/polyfill-mbstring": {
@@ -508,9 +461,6 @@
     "symfony/stopwatch": {
         "version": "v5.0.3"
     },
-    "symfony/string": {
-        "version": "v5.0.3"
-    },
     "symfony/translation-contracts": {
         "version": "v2.0.1"
     },
@@ -571,7 +521,7 @@
         ]
     },
     "symfony/yaml": {
-        "version": "v5.0.3"
+        "version": "v5.0.4"
     },
     "theseer/tokenizer": {
         "version": "1.1.3"
