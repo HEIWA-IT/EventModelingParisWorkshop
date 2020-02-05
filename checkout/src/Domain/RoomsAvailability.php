@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Domain;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use League\Period\Period;
 
 final class RoomsAvailability extends ArrayCollection
 {
@@ -18,14 +19,16 @@ final class RoomsAvailability extends ArrayCollection
         return $roomsAvailability;
     }
 
-    public function makeUnavailable(int $roomNumber)
+    public function unavailable(int $roomNumber, \DateTimeInterface $atDate = null, Period $period = null)
     {
-        $this->get($roomNumber)->makeUnavailable();
+        if (null === $period || $period->contains($atDate)) {
+            $this->get($roomNumber)->unavailable();
+        }
     }
 
-    public function makeAvailable(int $roomNumber)
+    public function available(int $roomNumber)
     {
-        $this->get($roomNumber)->makeAvailable();
+        $this->get($roomNumber)->available();
     }
 
     public function current(): RoomAvailability

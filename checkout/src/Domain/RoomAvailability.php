@@ -14,17 +14,17 @@ final class RoomAvailability
         $this->isAvailable = $isAvailable;
     }
 
-    public function isIsAvailable(): bool
+    public function isAvailable(): bool
     {
         return $this->isAvailable;
     }
 
-    public function makeUnavailable()
+    public function unavailable()
     {
         $this->isAvailable = false;
     }
 
-    public function makeAvailable()
+    public function available()
     {
         $this->isAvailable = true;
     }

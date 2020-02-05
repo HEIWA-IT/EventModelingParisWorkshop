@@ -8,9 +8,13 @@ use App\Domain\CheckedOutEvent;
 use App\Domain\Repository;
 use App\Domain\ReservationConfirmed;
 use App\Domain\RoomsAvailability;
+use App\EventsAware;
+use League\Period\Period;
 
 final class RoomsAvailabilityEventHandler
 {
+    use EventsAware;
+
     private Repository $repository;
 
     public function __construct(Repository $repository)
@@ -23,17 +27,11 @@ final class RoomsAvailabilityEventHandler
         $roomsAvailability = RoomsAvailability::generate(3);
 
         foreach ($this->repository->getAllEvents() as $event) {
-            if ($event instanceof CheckedInEvent) {
-                $roomsAvailability->makeUnavailable($event->roomNumber);
-            }
-            if ($event instanceof CheckedOutEvent) {
-                $roomsAvailability->makeAvailable($event->roomNumber);
-            }
-            if ($event instanceof ReservationConfirmed) {
-                if ($event->startDate <= $atDate && $atDate <= $event->endDate) {
-                    $roomsAvailability->makeUnavailable($event->roomNumber);
-                }
-            }
+            $this->match($event, [
+                CheckedInEvent::class => fn() => $roomsAvailability->unavailable($event->roomNumber),
+                CheckedOutEvent::class => fn() => $roomsAvailability->available($event->roomNumber),
+                ReservationConfirmed::class => fn() => $roomsAvailability->unavailable($event->roomNumber, $atDate, new Period($event->startDate, $event->endDate)),
+            ]);
         }
 
         return $roomsAvailability;

@@ -111,6 +111,9 @@
     "laminas/laminas-zendframework-bridge": {
         "version": "1.0.1"
     },
+    "league/period": {
+        "version": "4.9.0"
+    },
     "marc-mabe/php-enum": {
         "version": "v3.1.1"
     },

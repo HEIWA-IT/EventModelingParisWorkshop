@@ -31,7 +31,7 @@ class RoomsAvailabilityEventHandlerTest extends TestCase
         // then
         /** @var RoomAvailability $roomAvailability */
         foreach ($roomsAvailability as $roomAvailability) {
-            self::assertTrue($roomAvailability->isIsAvailable());
+            self::assertTrue($roomAvailability->isAvailable());
         }
     }
 

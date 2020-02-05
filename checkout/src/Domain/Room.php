@@ -3,8 +3,12 @@ declare(strict_types=1);
 
 namespace App\Domain;
 
+use App\EventsAware;
+
 final class Room
 {
+    use EventsAware;
+
     private int $roomNumber;
     private bool $occupied;
     private Events $raisedEvents;
@@ -21,12 +25,10 @@ final class Room
         foreach ($roomEvents as $roomEvent) {
             $room->roomNumber = $roomEvent->roomNumber;
 
-            if ($roomEvent instanceof CheckedInEvent) {
-                $room->occupied = true;
-            }
-            if ($roomEvent instanceof CheckedOutEvent) {
-                $room->occupied = false;
-            }
+            $room->occupied = $room->match($roomEvent, [
+                CheckedInEvent::class => fn() => true,
+                CheckedOutEvent::class => fn() => false,
+            ]);
         }
 
         return $room;
