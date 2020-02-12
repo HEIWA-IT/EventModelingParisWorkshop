@@ -5,10 +5,10 @@ namespace App;
 
 trait EventsAware
 {
-    public function match($var, array $map, callable $default = null)
+    public function match($event, array $eventTypes, callable $default = null)
     {
-        foreach ($map as $type => $fn) {
-            if ($var instanceof $type) {
+        foreach ($eventTypes as $type => $fn) {
+            if ($event instanceof $type) {
                 return $fn();
             }
         }
