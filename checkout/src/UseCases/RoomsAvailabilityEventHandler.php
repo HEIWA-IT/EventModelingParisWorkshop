@@ -30,7 +30,11 @@ final class RoomsAvailabilityEventHandler
             $this->match($event, [
                 CheckedInEvent::class => fn() => $roomsAvailability->unavailable($event->roomNumber),
                 CheckedOutEvent::class => fn() => $roomsAvailability->available($event->roomNumber),
-                ReservationConfirmed::class => fn() => $roomsAvailability->unavailable($event->roomNumber, $atDate, new Period($event->startDate, $event->endDate)),
+                ReservationConfirmed::class => fn() => $roomsAvailability->unavailable(
+                    $event->roomNumber,
+                    $atDate,
+                    new Period($event->startDate, $event->endDate)
+                ),
             ]);
         }
 
